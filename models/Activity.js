@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Workout extends Model {}
+class Activity extends Model {}
 
-Workout.init(
+Activity.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -22,36 +22,20 @@ Workout.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    workouttype_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'workouttype',
-        key: 'id',
-      },
-    },
     date_start: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    time_start: {
-      type: DataTypes.TIME,
-      allowNull: false,
-    },
     date_end: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
-    time_end: {
-      type: DataTypes.TIME,
-      allowNull: false,
-    },
-    calories_burned: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+    isCompleted: {
+      type: DataTypes.BOOLEAN,
+      default: false,
     },
     date_created: {
       type: DataTypes.DATE,
-      allowNull: false,
       defaultValue: DataTypes.NOW,
     },
   },
@@ -60,8 +44,8 @@ Workout.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'workout',
+    modelName: 'activity',
   }
 );
 
-module.exports = Workout;
+module.exports = Activity;

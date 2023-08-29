@@ -1,10 +1,8 @@
 const sequelize = require('../config/connection');
-const { User, WorkoutType, Workout } = require('../models');
+const { User, Activity } = require('../models');
 
 const userData = require('./userData.json');
-const workouttypeData = require('./workouttypeData.json');
-const workoutData = require('./workoutData.json');
-
+const activityData = require('./activityData.json');
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
@@ -14,19 +12,12 @@ const seedDatabase = async () => {
     returning: true,
   });
 
-  const workouttype = await WorkoutType.bulkCreate(workouttypeData, {
-    individualHooks: true,
-    returning: true,
-  });
-  
-  for (const workout of workoutData) {
-    await Workout.create({
-      ...workout,
+  for (const activity of activityData) {
+    await Activity.create({
+      ...activity,
       user_id: users[Math.floor(Math.random() * users.length)].id,
     });
   }
-
-  
 
   process.exit(0);
 };
