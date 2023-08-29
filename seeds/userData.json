@@ -3,8 +3,7 @@
     "first_name": "Sal",
     "last_name": "Sal",
     "email": "sal@hotmail.com",
-    "password": "password12345",
-    "mobile": "0400000000"
+    "password": "password12345"
   },
   {
     "first_name": "Peter",
@@ -18,7 +17,6 @@
     "last_name": "H",
     "email": "allen.h@hotmail.com",
     "password": "password12345",
-    "mobile": "0400000040",
     "isadmin": "1"
   }
 ]
