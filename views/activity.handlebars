@@ -1,0 +1,18 @@
+
+  
+    {{#if activities.length}}
+  <div class="col-md-6 project-list">
+    <h3>Current Activities:</h3>
+
+    {{#each activities as |activity|}}
+    <div class="row mb-2">
+      <div class="col-md-8">
+        <h4><a href="/activity/{{activity.id}}">{{activity.name}}</a></h4>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-sm btn-danger" data-id="{{activity.id}}">DELETE</button>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
