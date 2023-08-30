@@ -1,25 +1,25 @@
 const router = require('express').Router();
-const { Project, User } = require('../models');
+const { Activity, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
-    // const projectData = await Project.findAll({
-    //   include: [
-    //     {
-    //       model: User,
-    //       attributes: ['name'],
-    //     },
-    //   ],
-    // });
+    // Get all activitiess and JOIN with user data
+    const activityData = await Activity.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['email'],
+        },
+      ],
+    });
 
     // Serialize data so the template can read it
-    // const projects = projectData.map((project) => project.get({ plain: true }));
+    const activities = activityData.map((activity) => activity.get({ plain: true }));
 
     // Pass serialized data and session flag into template
     res.render('homepage', { 
-      projects: [], 
+      activities, 
       logged_in: req.session.logged_in 
     });
   } catch (err) {
@@ -28,21 +28,47 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/project/:id', async (req, res) => {
+router.get('/activity', async (req, res) => {
   try {
-    // const projectData = await Project.findByPk(req.params.id, {
-    //   include: [
-    //     {
-    //       model: User,
-    //       attributes: ['name'],
-    //     },
-    //   ],
-    // });
+    // Get all activitiess and JOIN with user data
+    const activityData = await Activity.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['email'],
+        },
+      ],
+    });
 
-    // const project = projectData.get({ plain: true });
+    // Serialize data so the template can read it
+    const activities = activityData.map((activity) => activity.get({ plain: true }));
 
-    res.render('project', {
-      // ...project,
+    // Pass serialized data and session flag into template
+    res.render('activity', { 
+      activities, 
+      logged_in: req.session.logged_in 
+    });
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err);
+  }
+});
+
+router.get('/activity/:id', async (req, res) => {
+  try {
+    const activityData = await Activity.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['email'],
+        },
+      ],
+    });
+
+    const activity = activityData.get({ plain: true });
+
+    res.render('activity', {
+       ...activity,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -56,7 +82,7 @@ router.get('/profile', withAuth, async (req, res) => {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      // include: [{ model: Project }],
+      include: [{ model: Activity }],
     });
 
     const user = userData.get({ plain: true });
@@ -68,6 +94,7 @@ router.get('/profile', withAuth, async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+
 });
 
 router.get('/login', (req, res) => {
