@@ -54,28 +54,6 @@ router.get('/activity', async (req, res) => {
   }
 });
 
-router.get('/activity/:id', async (req, res) => {
-  try {
-    const activityData = await Activity.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['email'],
-        },
-      ],
-    });
-
-    const activity = activityData.get({ plain: true });
-
-    res.render('activity', {
-       ...activity,
-      logged_in: req.session.logged_in
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 // Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {
   try {
