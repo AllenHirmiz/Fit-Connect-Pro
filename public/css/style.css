@@ -6,6 +6,15 @@
   --text:#333;
 }
 
+h4 {
+  color: #fff;
+}
+
+.navi {
+  box-shadow: 0px 0px !important;
+  background-color: #333 !important;
+}
+
 body {
   font-family: Arial;
   color: var(--text);
@@ -29,6 +38,15 @@ body {
 .homepage {
   background-image: url('/images/image1.jpeg');
   background-size: cover;
+  min-height: 100%;
+  min-width: 10px;
+	
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+	
+  /* Set up positioning */
+  position: fixed;
 }
 
 .brand-logo {
@@ -54,6 +72,47 @@ header {
 }
 .nav-wrapper {
   background-color: #333;
+  box-shadow: none;
+}
+
+.findbtn {
+  background-color: #333 !important;
+}
+
+.findbtn:hover {
+  background-color: #ffffff !important;
+  color: #333 !important;
+}
+
+li a:hover {
+  background-color: #ffffff !important;
+  color: #333 !important;
+}
+.input-field a {
+  color: #fff !important;
+}
+
+.input-field a:hover {
+  color: #201e1e !important;
+}
+
+.active {
+  color: #ffffff !important;
+}
+
+.homepage {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.homepage h1 {
+  color:#fff;
+  text-shadow:1px 1px 10px #1b1b1b, 1px 1px 10px #353535;
+  font-size:80px;
+  text-align:center;
+  margin: 2%;
 }
 
 /* LAYOUT */
