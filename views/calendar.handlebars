@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/calendar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/primeng/9.0.6/resources/components/fullcalendar/fullcalendar.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <h1>FitConnect Pro</h1>
+        </div>
+        <div class="header-right">
+            <!-- Links will be added here -->
+        </div>
+    </header>
+    <div id="calendar-container">
+        <div id="calendar"></div>
+    </div>
+    <div class="sections-container">
+        <div class="section" id="community-section">
+            <!-- Content for the community section -->
+        </div>
+        <div class="section" id="activity-section">
+            <!-- Content for the activity section -->
+        </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="activity-modal" class="modal">
+        <div class="modal-content">
+            <h4>Add Activity</h4>
+            <form id="activity-form">
+                <!-- Input fields for activity details -->
+                <div class="input-field">
+                    <input type="text" id="activity-name" name="activity-name">
+                    <label for="activity-name">Activity Name</label>
+                </div>
+                <!-- Add more input fields as needed -->
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn">Cancel</a>
+            <a href="#!" class="waves-effect waves-green btn" id="save-activity">Save</a>
+        </div>
+    </div>
+
+    <!-- Modal Structure for Customizing/Deleting Event -->
+<div id="custom-event-modal" class="modal">
+    <div class="modal-content">
+        <h4>Edit Event</h4>
+        <form id="custom-event-form">
+            <!-- Input field for event title -->
+            <div class="input-field">
+                <input type="text" id="event-title" name="event-title">
+                <label for="event-title">Event Title</label>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn" id="delete-event-button">Delete</a>
+        <a href="#!" class="waves-effect waves-green btn" id="edit-event-button">Edit</a>
+    </div>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/index.global.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/public/js/calendar.js"></script>
+</body>
+</html>
+
