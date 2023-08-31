@@ -3,13 +3,14 @@
 }
 
 :root {
-  --text: #dfdfec;
+  --text:#333;
 }
 
 body {
   font-family: Arial;
   color: var(--text);
   margin: 0;
+  background-color: #5885af;
 }
 
 .splash {
