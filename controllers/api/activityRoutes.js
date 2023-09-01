@@ -19,7 +19,10 @@ router.post('/', withAuth, async (req, res) => {
 router.put('/:id', withAuth, async (req, res) => {
   try {
     const activityData = await Activity.update(
-      {name: req.body.name },
+      {
+        name: req.body.name,
+        date_start: req.body.date_start
+      },
       {where: {
         id: req.params.id,
         // user_id: req.session.user_id,

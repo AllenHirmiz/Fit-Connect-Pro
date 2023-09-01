@@ -1,56 +1,59 @@
 <div class="jcc">
-    <div class="fit-form">
+  <div class="fit-form">
     <h4>Welcome {{first_name}}</h4>
-      <form class="update-profile-form">
-        <div>
-          <input type="hidden" id="id" value='{{id}}'/>
-          <div class='input-field'>
-            <input id='first_name' type='text' class='validate' value='{{first_name}}'/>
-            <label for='first_name'>first name</label>
-          </div>
-
-          <div class='input-field'>
-            <input id='last_name' type='text' class='validate' value='{{last_name}}'/>
-            <label for='last_name'>last name</label>
-          </div>
-
-          <div class='input-field'>
-            <input id='email' type='email' class='validate' value='{{email}}'/>
-            <label for='email'>email</label>
-          </div>
-
-          <div class='input-field'>
-            <input id='mobile' type='text' class='validate' value='{{mobile}}'/>
-            <label for='mobile'>mobile</label>
-          </div>
-
-          <div class='input-field'>
-            <button type='update' class='waves-effect waves-light btn findbtn'>Update Profile
-            </button>
-          </div>
-
+    <form class="update-profile-form">
+      <div>
+        <input type="hidden" id="id" value='{{id}}' />
+        <div class='input-field'>
+          <input id='first_name' type='text' class='validate' value='{{first_name}}' />
+          <label for='first_name'>first name</label>
         </div>
 
-      </form>
-  {{#if activities.length}}
-  <div class="col-md-6 activity-list">
-    <h3>Current Projects:</h3>
+        <div class='input-field'>
+          <input id='last_name' type='text' class='validate' value='{{last_name}}' />
+          <label for='last_name'>last name</label>
+        </div>
 
-    {{#each activities as |activity|}}
-    <div class="row mb-2">
-      <div class="col-md-8">
-        <h4><a href="/activity/{{activity.id}}">{{activity.name}}</a></h4>
+        <div class='input-field'>
+          <input id='email' type='email' class='validate' value='{{email}}' />
+          <label for='email'>email</label>
+        </div>
+
+        <div class='input-field'>
+          <input id='mobile' type='text' class='validate' value='{{mobile}}' />
+          <label for='mobile'>mobile</label>
+        </div>
+
+        <div class='input-field'>
+          <button type='update' class='waves-effect waves-light btn findbtn'>Update Profile
+          </button>
+        </div>
+
       </div>
-      <div class="col-md-4">
-        <button class="btn btn-sm btn-danger" data-id="{{activity.id}}">DELETE</button>
+
+    </form>
+    {{#if activities.length}}
+    <div class="col-md-6 activity-list">
+      <h3>Current Projects:</h3>
+
+      {{#each activities as |activity|}}
+      <div class="row mb-2">
+        <div class="col-md-8">
+          <h4><a href="/activity/{{activity.id}}">{{activity.name}} -
+              ${dayjs({{activity.date_start}}).format('YYYY-MM-DD')}</a></h4>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-sm btn-danger" data-id="{{activity.id}}">DELETE</button>
+        </div>
       </div>
+      {{/each}}
     </div>
-    {{/each}}
+    {{/if}}
+
   </div>
-  {{/if}}
-
-    </div>
 
 </div>
 </div>
 <script src="./js/profile.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+<script>dayjs().format()</script>
