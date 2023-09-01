@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const sequelize = require('../config/connection');
 const { Activity, User } = require('../models');
 const withAuth = require('../utils/auth');
 
@@ -95,5 +96,38 @@ router.get('/signup', (req, res) => {
   res.render('signup');
 });
 
+router.get('/calendar', withAuth, async (req, res) => {
+  try {
+    // Find the logged in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{
+        model: Activity,
+        attributes: [
+          'name',
+          [
+            sequelize.fn(
+              "DATE_FORMAT",
+              sequelize.col("date_start"),
+              "%Y-%m-%d"
+            ),
+            "date_start",
+          ]
+
+        ]
+      }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render('calendar', {
+      ...user,
+      logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+
+})
 
 module.exports = router;

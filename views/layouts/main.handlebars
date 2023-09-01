@@ -3,7 +3,7 @@
 <head>
   <meta charset='UTF-8' />
   <title>FitConnect Pro</title>
-
+ <link rel='stylesheet' href='/css/calendar.css' />
   <link rel='stylesheet' href='/css/style.css' />
   <!--Import materialize.css-->
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css' />
@@ -17,7 +17,7 @@
         <a href='/' class='brand-logo'>FitConnect Pro</a>
         <ul id='nav-mobile' class='right hide-on-med-and-down'>
           {{#if logged_in}}
-          <li><a href='collapsible.html'>Calendar</a></li>
+          <li><a href='/calendar'>Calendar</a></li>
           <li><a href='/profile'>Profile</a></li>
           <li><a id="logout">Logout</a></li>    
           {{else}}
@@ -34,9 +34,11 @@
   {{#if logged_in}}
   <script src="/js/logout.js"></script>
   {{/if}}
-  
+  <script src='/js/index.global.js'></script>
+  <script src='https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
-
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+<script>dayjs().format()</script>
 </body>
 
 </html>
