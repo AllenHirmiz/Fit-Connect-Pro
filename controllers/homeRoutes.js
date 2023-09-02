@@ -104,6 +104,7 @@ router.get('/calendar', withAuth, async (req, res) => {
       include: [{
         model: Activity,
         attributes: [
+          'id',
           'name',
           [
             sequelize.fn(
@@ -112,6 +113,14 @@ router.get('/calendar', withAuth, async (req, res) => {
               "%Y-%m-%d"
             ),
             "date_start",
+          ],
+          [
+            sequelize.fn(
+              "DATE_FORMAT",
+              sequelize.col("date_end"),
+              "%Y-%m-%d"
+            ),
+            "date_end",
           ]
 
         ]
