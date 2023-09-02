@@ -34,7 +34,7 @@
     </form>
     {{#if activities.length}}
     <div class="col-md-6 activity-list">
-      <h3>Current Projects:</h3>
+      <h3>Current Activities:</h3>
 
       {{#each activities as |activity|}}
       <div class="row mb-2">
@@ -43,7 +43,7 @@
               ${dayjs({{activity.date_start}}).format('YYYY-MM-DD')}</a></h4>
         </div>
         <div class="col-md-4">
-          <button class="btn btn-sm btn-danger" data-id="{{activity.id}}">DELETE</button>
+          <button class="btn btn-sm btn findbtn" data-id="{{activity.id}}">DELETE</button>
         </div>
       </div>
       {{/each}}
