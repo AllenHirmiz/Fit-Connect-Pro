@@ -4,9 +4,9 @@
 
       var calendar = new FullCalendar.Calendar(calendarEl, {
         headerToolbar: {
-          left: 'prev,next today',
+          left: 'prev,next',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          right: 'today'
         },
         timeZone: 'local',
         initialDate: dayjs().format('YYYY-MM-DD'),
@@ -14,8 +14,10 @@
         selectable: true,
         selectMirror: true,
         select: function (arg) {
-          var title = prompt('Event Title:');
+          var title = prompt('Event Title:Boo');
           if (title) {
+            let startdate=dayjs(arg.start).format("YYYY-MM-DD")+"T10:00:00.000Z"
+            eventCreateHandler(title,startdate,startdate)
             calendar.addEvent({
               title: title,
               start: arg.start,
@@ -26,9 +28,35 @@
           calendar.unselect()
         },
         eventClick: function (arg) {
-          if (confirm('Are you sure you want to delete this event?')) {
+          $(".update-modal-close").text("Cancel");
+          $("#update-modal").modal();
+          $('update-msg').text(`Update or Delete Activity: ${arg.event.title}`);
+          $("#update-modal").modal("open");
+          $(".update-modal-delete").click(function (event) {
             arg.event.remove()
-          }
+            $("#update-modal").modal("close");
+            eventDeleteHandler(arg.event.extendedProps.activity);
+          });          
+          $(".update-modal-close").click(function (event) {
+            $("#update-modal").modal("close");
+          });
+        },
+        eventDrop: function(info) {
+          $(".move-modal-close").text("Cancel");
+          $("#move-modal").modal();
+          $('.move-msg').text(`Move Activity: ${info.event.title} to ${dayjs(info.event.start).format("DD-MM-YYYY")}`);
+          $("#move-modal").modal("open");
+          $(".move-modal-save").click(function (event) {
+          $("#move-modal").modal("close");
+          let startdate=dayjs(info.event.start).format("YYYY-MM-DD")+"T10:00:00.000Z"
+
+          eventMoveHandler(info.event.extendedProps.activity,info.event.title,startdate,startdate)
+        });
+        $(".move-modal-close").click(function (event) {
+          info.revert();
+          $("#move-modal").modal("close");
+        });
+
         },
         editable: true,
         dayMaxEvents: true, // allow "more" link when too many events
@@ -38,7 +66,11 @@
 
          {
             title: '{{activity.name}}',
-            start: '{{activity.date_start}}'
+            start: '{{activity.date_start}}',
+            end: '{{activity.date_end}}',
+            extendedProps: {
+              activity: '{{activity.id}}'
+            }
           },
          {{/each}}
         {{/if}}
@@ -54,48 +86,63 @@
     <div id="calendar-container">
         <div id="calendar"></div>
     </div>
-    {{!-- <div class="sections-container">
-        <div class="section" id="community-section">
-            <!-- Content for the community section -->
-        </div>
-        <div class="section" id="activity-section">
-            <!-- Content for the activity section -->
-        </div>
-    </div> --}}
 
-    <!-- Modal Structure -->
-{{!--     <div id="activity-modal" class="modal">
+    <div id="modal" class="modal">
         <div class="modal-content">
-            <h4>Add Activity</h4>
-            <form id="activity-form">
-                <!-- Input fields for activity details -->
-                <div class="input-field">
-                    <input type="text" id="activity-name" name="activity-name">
-                    <label for="activity-name">Activity Name</label>
-                </div>
-                <!-- Add more input fields as needed -->
-            </form>
+            <h5 id="modal-header"></h5>
+        <div id="movie-list">
+
+            </div>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn">Cancel</a>
-            <a href="#!" class="waves-effect waves-green btn" id="save-activity">Save</a>
+            <button class="move-modal-close modal-action modal-close waves-effect waves-green btn-flat">Cancel</button>
         </div>
     </div>
- --}}
-    <!-- Modal Structure for Customizing/Deleting Event -->
-{{!-- <div id="custom-event-modal" class="modal">
-    <div class="modal-content">
-        <h4>Edit Event</h4>
-        <form id="custom-event-form">
-            <!-- Input field for event title -->
-            <div class="input-field">
-                <input type="text" id="event-title" name="event-title">
-                <label for="event-title">Event Title</label>
-            </div>
-        </form>
     </div>
-    <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn" id="delete-event-button">Delete</a>
-        <a href="#!" class="waves-effect waves-green btn" id="edit-event-button">Edit</a>
+
+
+    <div id="create-modal" class="modal">
+        <div class="modal-content">
+            <h5 class="create-msg"></h5>
+            <hr/>
+            <div id="create-details">
+
+            </div> 
+        </div>
+        <div class="modal-footer">
+            <a class="create-modal-close waves-effect waves-green btn">Cancel</a>
+            <a class="create-modal-add waves-effect waves-green btn">Add Actvitiy</a>
+        </div>
     </div>
-</div> --}}
+
+
+    <div id="update-modal" class="modal">
+        <div class="modal-content">
+            <h5 class="update-msg"></h5>
+            <hr/>
+            <div id="update-details">
+
+            </div> 
+        </div>
+        <div class="modal-footer">
+            <a class="update-modal-close waves-effect waves-green btn">Cancel</a>
+            <a class="update-modal-delete waves-effect waves-green btn">Delete</a>
+            <a class="update-modal-update waves-effect waves-green btn">Update</a>
+        </div>
+    </div>
+
+    <div id="move-modal" class="modal">
+        <div class="modal-content">
+            <h5 class="move-msg"></h5>
+            <hr/>
+            <div id="move-details">
+
+            </div> 
+        </div>
+        <div class="modal-footer">
+            <a class="move-modal-close waves-effect waves-green btn">Cancel</a>
+            <a class="move-modal-save waves-effect waves-green btn">Save</a>
+        </div>
+    </div>
+
+<script src='./js/event.js'></script>
