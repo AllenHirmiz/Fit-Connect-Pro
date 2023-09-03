@@ -44,20 +44,23 @@ header {
     color: black;
 }
 
-div.fc-toolbar-chunk:nth-child(3) > div:nth-child(1) {
+div.fc-toolbar-chunk:nth-child(3)>div:nth-child(1) {
     display: none !important;
 }
 
 .sections-container {
     display: flex;
-    flex-wrap: wrap; /* Allow sections to wrap on smaller screens */
+    flex-wrap: wrap;
+    /* Allow sections to wrap on smaller screens */
     justify-content: space-between;
     margin-top: 20px;
 }
 
 .section {
-    width: 100%; /* Make sections full width on small screens */
-    margin: 10px; /* Add some spacing between sections */
+    width: 100%;
+    /* Make sections full width on small screens */
+    margin: 10px;
+    /* Add some spacing between sections */
     box-sizing: border-box;
     border: 1px solid #ccc;
     padding: 20px;

@@ -16,15 +16,17 @@ router.get('/', async (req, res) => {
     });
 
     // Serialize data so the template can read it
-    const activities = activityData.map((activity) => activity.get({ plain: true }));
+    const activities = activityData.map((activity) =>
+      activity.get({ plain: true })
+    );
 
     // Pass serialized data and session flag into template
-    res.render('homepage', { 
-      activities, 
-      logged_in: req.session.logged_in 
+    res.render('homepage', {
+      activities,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -42,15 +44,17 @@ router.get('/activity', async (req, res) => {
     });
 
     // Serialize data so the template can read it
-    const activities = activityData.map((activity) => activity.get({ plain: true }));
+    const activities = activityData.map((activity) =>
+      activity.get({ plain: true })
+    );
 
     // Pass serialized data and session flag into template
-    res.render('activity', { 
-      activities, 
-      logged_in: req.session.logged_in 
+    res.render('activity', {
+      activities,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -61,43 +65,43 @@ router.get('/profile', withAuth, async (req, res) => {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{
-        model: Activity,
-        attributes: [
-          'id',
-          'name',
-          [
-            sequelize.fn(
-              'DATE_FORMAT',
-              sequelize.col('date_start'),
-              '%d-%m-%Y'
-            ),
-            'date_start',
+      include: [
+        {
+          model: Activity,
+          attributes: [
+            'id',
+            'name',
+            [
+              sequelize.fn(
+                'DATE_FORMAT',
+                sequelize.col('date_start'),
+                '%d-%m-%Y'
+              ),
+              'date_start',
+            ],
+            [
+              sequelize.fn(
+                'DATE_FORMAT',
+                sequelize.col('date_end'),
+                '%d-%m-%Y'
+              ),
+              'date_end',
+            ],
           ],
-          [
-            sequelize.fn(
-              'DATE_FORMAT',
-              sequelize.col('date_end'),
-              '%d-%m-%Y'
-            ),
-            'date_end',
-          ]
-
-        ]
-      }],
-        order: [[Activity,'date_start','ASC']]
+        },
+      ],
+      order: [[Activity, 'date_start', 'ASC']],
     });
 
     const user = userData.get({ plain: true });
 
     res.render('profile', {
       ...user,
-      logged_in: true
+      logged_in: true,
     });
   } catch (err) {
     res.status(500).json(err);
   }
-
 });
 
 router.get('/login', (req, res) => {
@@ -125,42 +129,42 @@ router.get('/calendar', withAuth, async (req, res) => {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{
-        model: Activity,
-        attributes: [
-          'id',
-          'name',
-          [
-            sequelize.fn(
-              'DATE_FORMAT',
-              sequelize.col('date_start'),
-              '%Y-%m-%d'
-            ),
-            'date_start',
+      include: [
+        {
+          model: Activity,
+          attributes: [
+            'id',
+            'name',
+            [
+              sequelize.fn(
+                'DATE_FORMAT',
+                sequelize.col('date_start'),
+                '%Y-%m-%d'
+              ),
+              'date_start',
+            ],
+            [
+              sequelize.fn(
+                'DATE_FORMAT',
+                sequelize.col('date_end'),
+                '%Y-%m-%d'
+              ),
+              'date_end',
+            ],
           ],
-          [
-            sequelize.fn(
-              'DATE_FORMAT',
-              sequelize.col('date_end'),
-              '%Y-%m-%d'
-            ),
-            'date_end',
-          ]
-
-        ]
-      }],
+        },
+      ],
     });
 
     const user = userData.get({ plain: true });
 
     res.render('calendar', {
       ...user,
-      logged_in: true
+      logged_in: true,
     });
   } catch (err) {
     res.status(500).json(err);
   }
-
-})
+});
 
 module.exports = router;

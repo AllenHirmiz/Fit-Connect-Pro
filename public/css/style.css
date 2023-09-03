@@ -104,6 +104,24 @@ body {
   color: var(--text);
   margin: 0;
   background-color: #5885af;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.page-footer {
+  background-color: #37474f;
+  padding-bottom: 20px;
+}
+
+.footer-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .activity-icon{

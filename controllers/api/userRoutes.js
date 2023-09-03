@@ -25,11 +25,13 @@ router.put('/:id', withAuth, async (req, res) => {
         last_name: req.body.last_name,
         mobile: req.body.mobile,
       },
-      {where: {
-        id: req.params.id,
-        // user_id: req.session.user_id,
-      },
-    });
+      {
+        where: {
+          id: req.params.id,
+          // user_id: req.session.user_id,
+        },
+      }
+    );
 
     if (!userData) {
       res.status(404).json({ message: 'No user found with this id!' });
@@ -43,7 +45,6 @@ router.put('/:id', withAuth, async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
 
@@ -66,10 +67,9 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-      
+
       res.json({ user: userData, message: 'You are now logged in!' });
     });
-
   } catch (err) {
     res.status(400).json(err);
   }

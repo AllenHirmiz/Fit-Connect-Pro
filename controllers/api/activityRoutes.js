@@ -15,20 +15,21 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-
 router.put('/:id', withAuth, async (req, res) => {
   try {
     const activityData = await Activity.update(
       {
         name: req.body.name,
         date_start: req.body.date_start,
-        date_end: req.body.date_end
+        date_end: req.body.date_end,
       },
-      {where: {
-        id: req.params.id,
-        // user_id: req.session.user_id,
-      },
-    });
+      {
+        where: {
+          id: req.params.id,
+          // user_id: req.session.user_id,
+        },
+      }
+    );
 
     if (!activityData) {
       res.status(404).json({ message: 'No activity found with this id!' });
@@ -64,9 +65,9 @@ router.delete('/:id', withAuth, async (req, res) => {
 module.exports = router;
 
 router.get('/:id', withAuth, async (req, res) => {
-  console.log(req)
+  console.log(req);
   try {
-    const activityData = await Activity.findByPk(req.params.id,{
+    const activityData = await Activity.findByPk(req.params.id, {
       where: {
         id: req.params.id,
         user_id: req.session.user_id,
