@@ -22,17 +22,25 @@ Web Based
 ## Technologies Used
 The Activity Tracker website is built using the following technologies:
 
-HTML5: The structure and layout of the web pages.
-CSS3: Styling and visual enhancements for an appealing user interface.
-JavaScript: Dynamic and interactive elements, such as animations and form validation.
-Git: Version control system for managing codebase changes.
-GitHub Pages: Hosting service for deploying the website.
-NodeJS:
-inquirer Library: 
-express Library:
-mysql2 Library
-Materialize framework:
-FullCalendar:
+1. Boot Camp Materials - Lesson Material from Weeks 1 - 14
+2. Prior Knowledge and experience
+3. [MySQL][def1] Documentation
+4. [mysql2][def2] Documentation
+5. [Sequelize v6][def3] Documentation
+6. [Express HandleBars][def4] Documentation
+7. [Materialize][def5] Documentation
+8. [DayJS][def6] Documentation
+9. [Full Calendar][def7] Documentation
+10. [toTitleCase Code][def8] on Stack Overflow
+    
+[def1]: https://dev.mysql.com/doc/
+[def2]: https://www.npmjs.com/package/mysql2
+[def3]: https://www.npmjs.com/package/sequelize
+[def4]: https://www.npmjs.com/package/express-handlebars
+[def5]: https://materializecss.com/
+[def6]: https://day.js.org/docs/en/installation/node-js
+[def7]: https://fullcalendar.io/docs
+[def8]: https://stackoverflow.com/questions/5086390/jquery-title-case
 
 
 
