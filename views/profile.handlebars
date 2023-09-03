@@ -64,9 +64,10 @@
 
     <div class='col s12 m6 l6'>
 
-      {{#if activities.length}}
+      
       <h4>Current Activities:</h4><br /><br/>
       <div class='activity-list'>
+        {{#if activities.length}}
         <table>
           <tr>
             <th>Date</th>
@@ -85,8 +86,9 @@
           {{/each}}
 
         </table>
+        {{/if}}
       </div>
-      {{/if}}
+      
     </div>
   </div>
 </div>
