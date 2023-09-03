@@ -10,7 +10,7 @@
       rel='stylesheet'
       href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'
     />
-        <link rel='stylesheet' href='/css/calendar.css' />
+    <link rel='stylesheet' href='/css/calendar.css' />
     <link rel='stylesheet' href='/css/style.css' />
     <link
       href='https://fonts.googleapis.com/icon?family=Material+Icons'
@@ -20,29 +20,43 @@
   </head>
 
   <body>
-  <!-- Website Header  -->
-  <header>
-    <!-- Website logo -->
-    <h1 class="logo">
-      <a href='/' class='brand-logo'>FitConnect Pro</a>
-    </h1>
-        
-    <!-- Website Nav  -->
-    <nav>
-      <ul id='nav-mobile' class='right'>
-        {{#if logged_in}}
-          <li><a href='/calendar'>Calendar</a></li>
-          <li><a href='/profile'>Profile</a></li>
-          <li><a id='logout'>Logout</a></li>
-        {{else}}
-          <li><a href='/login'>Login </a></li>
-          <li><a href='/signup'>Sign Up</a></li>
-        {{/if}}
-      </ul>
-    </nav>
-  </header>
+    <!-- Website Header  -->
+    <header>
+      <!-- Website logo -->
+      <h1 class='logo'>
+        <a href='/' class='brand-logo'>FitConnect Pro</a>
+      </h1>
 
-    {{{body}}}
+      <!-- Website Nav  -->
+      <nav>
+        <ul id='nav-mobile' class='right'>
+          {{#if logged_in}}
+            <li><a href='/calendar'>Calendar</a></li>
+            <li><a href='/profile'>Profile</a></li>
+            <li><a id='logout'>Logout</a></li>
+          {{else}}
+            <li><a href='/login'>Login </a></li>
+            <li><a href='/signup'>Sign Up</a></li>
+          {{/if}}
+        </ul>
+      </nav>
+    </header>
+<main>{{{body}}}</main>
+    
+
+    <footer class='page-footer'>
+      <div class='container'>
+        <div class='footer-bar'>
+          <div>© 2023 Copyright - Project Team 6</div>
+          <div>FitConnect Pro brought to you by
+            <a href='https://github.com/AllenHirmiz'>Allen</a>,
+            <a href='https://github.com/msadio8'>Meriam</a>,
+            <a href='https://github.com/dingogap'>Peter</a>
+            &
+            <a href='https://github.com/SHS-Peb'>Shannon</a></div>
+        </div>
+      </div>
+    </footer>
 
     {{#if logged_in}}
       <script src='/js/logout.js'></script>
