@@ -6,6 +6,80 @@
   --text: #333;
 }
 
+
+
+
+/* header styles */
+header {
+  box-shadow: 0px 0px !important;
+  background-color: #333 !important;
+  color: white;
+  padding: 10px 20px;
+}
+
+header h1 {
+  font-size:2rem;
+}
+
+nav {
+  box-shadow: 0px 0px !important;
+  background-color: #333 !important;
+  color: white;
+}
+
+.right {
+  text-align: center;
+  list-style: inside;
+}
+
+
+
+  /* Logo Styles */
+.logo {
+  background: var(--text-main);
+  margin: 10px 0px;
+  text-align: right;
+  width: 280px;
+}
+
+.logo a {
+text-decoration: none;
+color: var(--text-second)
+}
+
+.logo a:link,a:hover {
+text-decoration: none;
+color: var(--color-second)
+}
+ 
+/* Navigation style */
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  min-width: 300px;
+  }
+  
+nav li {
+  border-bottom: 4px solid;
+  border-color: var(--text-main);
+  margin: 5px;
+}
+
+nav a {
+  color: var(--text-main);
+  font-family: Arial;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  padding: 20px;
+  font-size: 24px;
+  font-weight: 200;
+}
+
+nav a:hover {
+  color:var(--color-second);  
+}
+
 h4 {
   color: #fff;
 }
@@ -22,11 +96,7 @@ tr {
 }
 .brand-logo {
   font-style: italic;
-  font-weight: 900;
-}
-.navi {
-  box-shadow: 0px 0px !important;
-  background-color: #333 !important;
+  font-weight: 500;
 }
 
 body {
@@ -139,14 +209,6 @@ cursor: pointer;
   text-align: center;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333;
-  color: white;
-  padding: 10px 20px;
-}
 .nav-wrapper {
   background-color: #333;
   box-shadow: none;
@@ -273,3 +335,41 @@ li a:hover {
     font-size: 1.3rem;
 }
 }
+
+
+/* Mobile CSS changes*/
+@media screen and (max-width: 769px) {
+  header, main, .main-div {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  nav {
+    display: grid;
+  }
+
+  nav a {
+    font-size: 18px;
+    font-weight: 200;
+    padding: 2px;
+  }
+
+  .logo {
+    text-align:center;
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: space-between;
+    min-width: 300px;
+    align-items: center;
+    }
+    
+  nav li {
+    border-bottom: 4px solid;
+    border-color: var(--text-main);
+    margin: 5px;
+  }
+
+}
+

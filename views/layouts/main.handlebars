@@ -20,23 +20,27 @@
   </head>
 
   <body>
-    <header>
-      <nav class='navi'>
-        <div class='nav-wrapper'>
-          <a href='/' class='brand-logo'>FitConnect Pro</a>
-          <ul id='nav-mobile' class='right'>
-            {{#if logged_in}}
-              <li><a href='/calendar'>Calendar</a></li>
-              <li><a href='/profile'>Profile</a></li>
-              <li><a id='logout'>Logout</a></li>
-            {{else}}
-              <li><a href='/login'>Login </a></li>
-              <li><a href='/signup'>Sign Up</a></li>
-            {{/if}}
-          </ul>
-        </div>
-      </nav>
-    </header>
+  <!-- Website Header  -->
+  <header>
+    <!-- Website logo -->
+    <h1 class="logo">
+      <a href='/' class='brand-logo'>FitConnect Pro</a>
+    </h1>
+        
+    <!-- Website Nav  -->
+    <nav>
+      <ul id='nav-mobile' class='right'>
+        {{#if logged_in}}
+          <li><a href='/calendar'>Calendar</a></li>
+          <li><a href='/profile'>Profile</a></li>
+          <li><a id='logout'>Logout</a></li>
+        {{else}}
+          <li><a href='/login'>Login </a></li>
+          <li><a href='/signup'>Sign Up</a></li>
+        {{/if}}
+      </ul>
+    </nav>
+  </header>
 
     {{{body}}}
 
