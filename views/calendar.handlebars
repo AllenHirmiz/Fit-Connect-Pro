@@ -14,52 +14,86 @@
         selectable: true,
         selectMirror: true,
         select: function (arg) {
-          var title = prompt('Event Title:Boo');
-          if (title) {
-            let startdate=dayjs(arg.start).format("YYYY-MM-DD")+"T10:00:00.000Z"
-            eventCreateHandler(title,startdate,startdate)
+          $('.create-modal-close').text('Cancel');
+          $('#create-modal').modal();
+          $('.create-msg').text(`Add New Activity`);
+          $('#create-modal').modal('open');
+          $('.create-modal-close').click(function (event) {
+            $('#create-modal').modal('close');
+          });
+          $('.create-modal-add').click(function (event) {
+            $('#create-modal').modal('close');
+            let startdate=dayjs(arg.start).format('YYYY-MM-DD')+'T10:00:00.000Z'
+            eventCreateHandler(toTitleCase($('#new-activity-name').val()),startdate,dayjs(startdate).add(1,'day'))
             calendar.addEvent({
-              title: title,
+              title: toTitleCase($('#new-activity-name').val()),
               start: arg.start,
-              end: arg.end,
+              end: arg.start,
               allDay: arg.allDay
             })
-          }
+            $('#new-activity-name').val('')
+          });
           calendar.unselect()
         },
         eventClick: function (arg) {
-          $(".update-modal-close").text("Cancel");
-          $("#update-modal").modal();
-          $('update-msg').text(`Update or Delete Activity: ${arg.event.title}`);
-          $("#update-modal").modal("open");
-          $(".update-modal-delete").click(function (event) {
+          $('.update-modal-close').text('Cancel');
+          $('#update-modal').modal();
+          $('.update-msg').text(`Update or Delete Activity: ${toTitleCase(arg.event.title)}`);
+          $('#update-activity-name').val(`${toTitleCase(arg.event.title)}`)
+          $('#update-modal').modal('open');
+          $('.update-modal-update').click(function (event) {
+            $('#update-modal').modal('close');
+            let startdate=dayjs(arg.event.start).format('YYYY-MM-DD')+'T10:00:00.000Z'
+            let enddate=dayjs(arg.event.end).format('YYYY-MM-DD')+'T10:00:00.000Z' 
+            if (!enddate.length >= 0){
+              enddate=dayjs(startdate).add(1,'day')
+            } 
+            arg.event.setProp('title',toTitleCase($('#update-activity-name').val()))
+            eventUpdateHandler(arg.event.extendedProps.activity, toTitleCase($('#update-activity-name').val()), startdate, enddate)
+            $('#update-activity-name').val('')
+          });          
+          $('.update-modal-delete').click(function (event) {
             arg.event.remove()
-            $("#update-modal").modal("close");
+            $('#update-modal').modal('close');
             eventDeleteHandler(arg.event.extendedProps.activity);
           });          
-          $(".update-modal-close").click(function (event) {
-            $("#update-modal").modal("close");
+          $('.update-modal-close').click(function (event) {
+            $('#update-modal').modal('close');
           });
         },
         eventDrop: function(info) {
-          $(".move-modal-close").text("Cancel");
-          $("#move-modal").modal();
-          $('.move-msg').text(`Move Activity: ${info.event.title} to ${dayjs(info.event.start).format("DD-MM-YYYY")}`);
-          $("#move-modal").modal("open");
-          $(".move-modal-save").click(function (event) {
-          $("#move-modal").modal("close");
-          let startdate=dayjs(info.event.start).format("YYYY-MM-DD")+"T10:00:00.000Z"
-
-          eventMoveHandler(info.event.extendedProps.activity,info.event.title,startdate,startdate)
-        });
-        $(".move-modal-close").click(function (event) {
-          info.revert();
-          $("#move-modal").modal("close");
-        });
-
+          $('.move-modal-close').text('Cancel');
+          $('#move-modal').modal();
+          $('.move-msg').text(`Move Activity: ${info.event.title} to ${dayjs(info.event.start).format('DD-MM-YYYY')}`);
+          $('#move-modal').modal('open');
+          $('.move-modal-save').click(function (event) {
+            $('#move-modal').modal('close');
+            let startdate=dayjs(info.event.start).format('YYYY-MM-DD')+'T10:00:00.000Z'
+            eventMoveHandler(info.event.extendedProps.activity, info.event.title, startdate, startdate)
+          });
+          $('.move-modal-close').click(function (event) {
+            info.revert();
+            $('#move-modal').modal('close');
+          });
         },
+        eventResize: function(info) {
+          $('.resize-modal-close').text('Cancel');
+          $('#resize-modal').modal();
+          $('.resize-msg').text(`Adjust Activity Duration: ${info.event.title} to ${dayjs(info.event.end).subtract(1, 'day').format('DD-MM-YYYY')}`);
+          $('#resize-modal').modal('open');
+          $('.resize-modal-save').click(function (event) {
+            $('#resize-modal').modal('close');
+            let startdate=dayjs(info.event.start).format('YYYY-MM-DD')+'T10:00:00.000Z'
+            let enddate=dayjs(info.event.end).format('YYYY-MM-DD')+'T10:00:00.000Z'
+            eventMoveHandler(info.event.extendedProps.activity, info.event.title, startdate, enddate)
+          });
+          $('.resize-modal-close').click(function (event) {
+            info.revert();
+            $('#resize-modal').modal('close');
+          });
+        },        
         editable: true,
-        dayMaxEvents: true, // allow "more" link when too many events
+        dayMaxEvents: true, // allow 'more' link when too many events
         events: [
         {{#if activities.length}}
          {{#each activities as |activity|}}
@@ -81,68 +115,96 @@
       calendar.render();
     });
 
+    function toTitleCase(str) {
+        var lcStr = str.toLowerCase();
+        return lcStr.replace(/(?:^|\s)\w/g, function(match) {
+            return match.toUpperCase();
+        });
+    }
+
   </script>
    
-    <div id="calendar-container">
-        <div id="calendar"></div>
+    <div id='calendar-container'>
+        <div id='calendar'></div>
     </div>
 
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <h5 id="modal-header"></h5>
-        <div id="movie-list">
+    <div id='modal' class='modal'>
+        <div class='modal-content'>
+            <h5 id='modal-header'></h5>
+        <div id='movie-list'>
 
             </div>
         </div>
-        <div class="modal-footer">
-            <button class="move-modal-close modal-action modal-close waves-effect waves-green btn-flat">Cancel</button>
+        <div class='modal-footer'>
+            <button class='move-modal-close modal-action modal-close waves-effect waves-green btn-flat'>Cancel</button>
         </div>
     </div>
     </div>
 
-
-    <div id="create-modal" class="modal">
-        <div class="modal-content">
-            <h5 class="create-msg"></h5>
+    {{!-- Modal - Create New Activity --}}
+    <div id='create-modal' class='modal'>
+        <div class='modal-content'>
+            <h5 class='create-msg'></h5>
             <hr/>
-            <div id="create-details">
+            <div id='create-details'>
+        <div class='input-field col s6'>
+          <input id='new-activity-name' type='text' class='validate' value=''>
+          <label for='new-activity-name'>New Activity</label>
+        </div>
+            </div> 
+        </div>
+        <div class='modal-footer'>
+            <a class='create-modal-close waves-effect waves-green btn'>Cancel</a>
+            <a class='create-modal-add waves-effect waves-green btn'>Add Actvitiy</a>
+        </div>
+    </div>
+
+    {{!-- Modal - Confirm or Cancel Activity Delete or Activity Update Event--}}
+    <div id='update-modal' class='modal'>
+        <div class='modal-content'>
+            <h5 class='update-msg'></h5>
+            <hr/>
+            <div id='update-details'>
+        <div class='input-field col s6'>
+          <input id='update-activity-name' type='text' class='validate' value= arg.event.title>
+          <label for='update-activity-name'>Update Activity</label>
+        </div>
+            </div> 
+        </div>
+        <div class='modal-footer'>
+            <a class='update-modal-close waves-effect waves-green btn'>Cancel</a>
+            <a class='update-modal-delete waves-effect waves-green btn'>Delete</a>
+            <a class='update-modal-update waves-effect waves-green btn'>Update</a>
+        </div>
+    </div>
+
+    {{!-- Modal - Confirm or Cancel Activity Move Event  --}}
+    <div id='move-modal' class='modal'>
+        <div class='modal-content'>
+            <h5 class='move-msg'></h5>
+            <hr/>
+            <div id='move-details'>
 
             </div> 
         </div>
-        <div class="modal-footer">
-            <a class="create-modal-close waves-effect waves-green btn">Cancel</a>
-            <a class="create-modal-add waves-effect waves-green btn">Add Actvitiy</a>
+        <div class='modal-footer'>
+            <a class='move-modal-close waves-effect waves-green btn'>Cancel</a>
+            <a class='move-modal-save waves-effect waves-green btn'>Save</a>
         </div>
     </div>
 
-
-    <div id="update-modal" class="modal">
-        <div class="modal-content">
-            <h5 class="update-msg"></h5>
+    {{!-- Modal - Confirm or Cancel Activity Resize Event  --}}
+    <div id='resize-modal' class='modal'>
+        <div class='modal-content'>
+            <h5 class='resize-msg'></h5>
             <hr/>
-            <div id="update-details">
-
+            <div id='resize-details'>
             </div> 
         </div>
-        <div class="modal-footer">
-            <a class="update-modal-close waves-effect waves-green btn">Cancel</a>
-            <a class="update-modal-delete waves-effect waves-green btn">Delete</a>
-            <a class="update-modal-update waves-effect waves-green btn">Update</a>
+        <div class='modal-footer'>
+            <a class='resize-modal-close waves-effect waves-green btn'>Cancel</a>
+            <a class='resize-modal-save waves-effect waves-green btn'>Save</a>
         </div>
-    </div>
-
-    <div id="move-modal" class="modal">
-        <div class="modal-content">
-            <h5 class="move-msg"></h5>
-            <hr/>
-            <div id="move-details">
-
-            </div> 
-        </div>
-        <div class="modal-footer">
-            <a class="move-modal-close waves-effect waves-green btn">Cancel</a>
-            <a class="move-modal-save waves-effect waves-green btn">Save</a>
-        </div>
-    </div>
+    </div>    
 
 <script src='./js/event.js'></script>

@@ -19,4 +19,15 @@ module.exports = {
       return `<span for="img" aria-label="gear">⚙️</span>`;
     }
   },
+
+
+  toTitleCase: (str) => {
+    var lcStr = str.toLowerCase();
+    return lcStr.replace(/(?:^|\s)\w/g, function(match) {
+        return match.toUpperCase();
+    });
+  }
+
+
 };
+
