@@ -61,7 +61,31 @@ router.get('/profile', withAuth, async (req, res) => {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Activity }],
+      include: [{
+        model: Activity,
+        attributes: [
+          'id',
+          'name',
+          [
+            sequelize.fn(
+              'DATE_FORMAT',
+              sequelize.col('date_start'),
+              '%d-%m-%Y'
+            ),
+            'date_start',
+          ],
+          [
+            sequelize.fn(
+              'DATE_FORMAT',
+              sequelize.col('date_end'),
+              '%d-%m-%Y'
+            ),
+            'date_end',
+          ]
+
+        ]
+      }],
+        order: [[Activity,'date_start','ASC']]
     });
 
     const user = userData.get({ plain: true });
@@ -108,19 +132,19 @@ router.get('/calendar', withAuth, async (req, res) => {
           'name',
           [
             sequelize.fn(
-              "DATE_FORMAT",
-              sequelize.col("date_start"),
-              "%Y-%m-%d"
+              'DATE_FORMAT',
+              sequelize.col('date_start'),
+              '%Y-%m-%d'
             ),
-            "date_start",
+            'date_start',
           ],
           [
             sequelize.fn(
-              "DATE_FORMAT",
-              sequelize.col("date_end"),
-              "%Y-%m-%d"
+              'DATE_FORMAT',
+              sequelize.col('date_end'),
+              '%Y-%m-%d'
             ),
-            "date_end",
+            'date_end',
           ]
 
         ]

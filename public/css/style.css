@@ -13,6 +13,13 @@ h3 {
   color: #fff;
 }
 
+th {
+  color: #fff;
+}
+
+tr {
+  color: black;
+}
 .brand-logo {
   font-style: italic;
   font-weight: 900;
@@ -29,6 +36,45 @@ body {
   background-color: #5885af;
 }
 
+.activity-icon{
+  background-color: #5885af;
+  padding: 0;
+  border: none;
+}
+.activity-list li {
+  vertical-align: middle
+}
+
+.saved-activities {
+  max-width:fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  vertical-align: middle;
+
+  color: black;
+}
+
+i.button-delete {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: #37474f;
+  z-index: 5;
+  font-size: 1.8rem;
+  margin-right:-35px;
+}
+i.button-delete:hover {
+cursor: pointer;
+}
+
+.profile {
+  margin-left: 5%;
+  max-width: 90%;
+}
 /* margin-top: 120px; */
 /* example of responsive design
      the element "tries" to be 900px
@@ -173,3 +219,57 @@ li a:hover {
     background-image: none;
   }
 } */
+
+/* styling for small tablet - landscape */
+@media only screen and (max-width: 992px) {
+  nav .brand-logo {
+    left: 12%;
+}
+}
+
+@media only screen and (max-width: 806px) {
+  nav .brand-logo {
+    left: 14%;
+}
+}
+
+@media only screen and (max-width: 741px) {
+  nav .brand-logo {
+    left: 16%;
+}
+}
+
+@media only screen and (max-width: 741px) {
+  nav .brand-logo {
+    left: 13%;
+    font-size: 1.65rem;
+}
+}
+
+@media only screen and (max-width: 600px) {
+  nav .brand-logo {
+    left: 15%;
+    font-size: 1.65rem;
+}
+}
+
+@media only screen and (max-width: 525px) {
+  nav .brand-logo {
+    left: 17%;
+    font-size: 1.60rem;
+}
+}
+
+@media only screen and (max-width: 450px) {
+  nav .brand-logo {
+    left: 19%;
+    font-size: 1.55rem;
+}
+}
+
+@media only screen and (max-width: 410px) {
+  nav .brand-logo {
+    left: 16%;
+    font-size: 1.3rem;
+}
+}
