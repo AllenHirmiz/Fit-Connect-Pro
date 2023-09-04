@@ -109,6 +109,8 @@ body {
   flex-direction: column;
 }
 
+
+/* render sticky footer */
 main {
   flex: 1 0 auto;
 }
@@ -141,10 +143,10 @@ main {
   margin-top: 15px;
   margin-bottom: 15px;
   vertical-align: middle;
-
   color: black;
 }
 
+/* render delete icon */
 i.button-delete {
   width: 50px;
   height: 50px;
@@ -155,6 +157,7 @@ i.button-delete {
   font-size: 1.8rem;
   margin-right:-35px;
 }
+
 i.button-delete:hover {
 cursor: pointer;
 }
@@ -191,19 +194,6 @@ cursor: pointer;
   right: 25%;
   top: 300px;
 
-  /* 
-    use a combination of 
-      position:absolute;
-      and
-      top/left/bottom/right: ___px;
-    if you want to move it in terms of its parent
-
-    or use
-      transform: translate([x axis], [y axis]);
-    if you want to move it relative to its original position
-
-    text-shadow: x y blur color;
-  */
   text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
   font-size: 80px;
   margin: 2%;

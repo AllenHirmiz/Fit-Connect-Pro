@@ -31,7 +31,8 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/activity', async (req, res) => {
+// Get Activity Data
+router.get('/activity', withAuth, async (req, res) => {
   try {
     // Get all activitiess and JOIN with user data
     const activityData = await Activity.findAll({
@@ -124,6 +125,7 @@ router.get('/signup', (req, res) => {
   res.render('signup');
 });
 
+// Get Activities for the current user and render the Calendar
 router.get('/calendar', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
