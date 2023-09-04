@@ -1,31 +1,33 @@
-# Activity Tracker
+# FitConnect Pro - An Activity Tracker
 
-Activity Tracker is a web based website that allows their website users to keep track of their activities on daily basis,
+## Description
+
+FitConnect Pro is a web based website that allows their website users to keep track of their activities on daily basis.
 The user will be require to sign up to the app to be able to use the Activity Tracker website free of charge.
 Once signed up the user will be able to update their information and add their activities no matter if it was an old, new or future activity.
 The user would have access to the following pages once logged in:
 * Profile
 * Calendar
+
+
 Also they are able to sign out from the website by clicking on Sign Out button that is available on the website navigation bar.
 
 
 ## GitHub Repo URL
 https://github.com/dingogap/Fit-Connect-Pro
 
-## Website URL (Heroku)
+## Website URL on Heroku
 https://infinite-shore-46121-83c2f6ef6518.herokuapp.com/
 
 ## Table of Contents
-Navigation menu
-Cover photo
-Login
-Sign up
-Sign out
-Profile Page
-Calendar Page
+* [GitHub Repo URL](#github-repo-url)
+* [Website URL on Heroku](#website-url-on-heroku)
+* [Technologies Used](#technologies-used)
+* [Main Page](#main-page)
+* [Profile Page](#profile-page)
+* [Calendar Page](#calendar-page)
+* [Mobile Layout](#mobile-layout)
 
-## Installation
-Web Based
 ## Technologies Used
 The Activity Tracker website is built using the following technologies:
 
@@ -53,7 +55,7 @@ The Activity Tracker website is built using the following technologies:
 
 ## Mock-Up
 
-The following image shows the web application's appearance and functionality:
+The following images shows the web application's appearance and functionality:
 
 ## Main Page
 ![Activity Tracker main page includes a navigation bar, a cover image, and slogan](./assets/images/main-page.png)
