@@ -13,6 +13,8 @@
         navLinks: true, // can click day/week names to navigate views
         selectable: true,
         selectMirror: true,
+
+        // Create Activity
         select: function (arg) {
           $('.create-modal-close').text('Cancel');
           $('#create-modal').modal();
@@ -35,6 +37,8 @@
           });
           calendar.unselect()
         },
+
+        // Update or Delete Activity
         eventClick: function (arg) {
           $('.update-modal-close').text('Cancel');
           $('#update-modal').modal();
@@ -61,6 +65,8 @@
             $('#update-modal').modal('close');
           });
         },
+
+        // Drag Activity
         eventDrop: function(info) {
           $('.move-modal-close').text('Cancel');
           $('#move-modal').modal();
@@ -76,6 +82,8 @@
             $('#move-modal').modal('close');
           });
         },
+
+        // Resize Activity
         eventResize: function(info) {
           $('.resize-modal-close').text('Cancel');
           $('#resize-modal').modal();
@@ -94,6 +102,8 @@
         },        
         editable: true,
         dayMaxEvents: true, // allow 'more' link when too many events
+        
+        // Render all Activites Received from Database
         events: [
         {{#if activities.length}}
          {{#each activities as |activity|}}
@@ -115,6 +125,7 @@
       calendar.render();
     });
 
+    // Cnovert to TitleCase 
     function toTitleCase(str) {
         var lcStr = str.toLowerCase();
         return lcStr.replace(/(?:^|\s)\w/g, function(match) {

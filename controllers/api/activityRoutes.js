@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Activity } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+// Create new Activity
 router.post('/', withAuth, async (req, res) => {
   try {
     const newActivity = await Activity.create({
@@ -15,6 +16,7 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+// Update Activity
 router.put('/:id', withAuth, async (req, res) => {
   try {
     const activityData = await Activity.update(
@@ -42,6 +44,7 @@ router.put('/:id', withAuth, async (req, res) => {
   }
 });
 
+// Delete Activity
 router.delete('/:id', withAuth, async (req, res) => {
   try {
     const activityData = await Activity.destroy({
@@ -64,6 +67,7 @@ router.delete('/:id', withAuth, async (req, res) => {
 
 module.exports = router;
 
+// Get Activity Details
 router.get('/:id', withAuth, async (req, res) => {
   console.log(req);
   try {
