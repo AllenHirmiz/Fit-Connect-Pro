@@ -1,12 +1,19 @@
 # Activity Tracker
 
-Project overview goes here
+Activity Tracker is a web based website that allows their website users to keep track of their activities on daily basis,
+The user will be require to sign up to the app to be able to use the Activity Tracker website free of charge.
+Once signed up the user will be able to update their information and add their activities no matter if it was an old, new or future activity.
+The user would have access to the following pages once logged in:
+* Profile
+* Calendar
+Also they are able to sign out from the website by clicking on Sign Out button that is available on the website navigation bar.
+
 
 ## GitHub Repo URL
-https://github.com/AllenHirmiz/Protfolio-Website-Advanced-CSS
+https://github.com/dingogap/Fit-Connect-Pro
 
-## Website URL
-https://radiant-temple-68140-fe49fe21fe71.herokuapp.com/
+## Website URL (Heroku)
+https://infinite-shore-46121-83c2f6ef6518.herokuapp.com/
 
 ## Table of Contents
 Navigation menu
